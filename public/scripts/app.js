@@ -23,6 +23,20 @@ var template = React.createElement(
     'p',
     null,
     siteInfo.options.length > 0 ? 'Here are your options' : 'No options available'
+  ),
+  React.createElement(
+    'ol',
+    null,
+    React.createElement(
+      'li',
+      null,
+      'Item One'
+    ),
+    React.createElement(
+      'li',
+      null,
+      'Items Two'
+    )
   )
 );
 
@@ -42,24 +56,55 @@ var getLocation = function getLocation(location) {
     );
   }
 };
+var count = 0;
 
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    user.name ? user.name : 'Anonymous'
-  ),
-  user.age && user.age >= 18 && React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  getLocation(user.location)
-);
+var increase = function increase() {
+  console.log('Add one');
+  count++;
+  renderCounterApp();
+};
+
+var decrease = function decrease() {
+  console.log('Substract one');
+  count--;
+  renderCounterApp();
+};
+
+var reset = function reset() {
+  console.log('reset');
+  count = 0;
+  renderCounterApp();
+};
 
 var root = document.getElementById('root');
 
-ReactDOM.render(template, root);
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: increase, className: 'button' },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: decrease, className: 'button' },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'Reset'
+    )
+  );
+  ReactDOM.render(templateTwo, root);
+};
+
+renderCounterApp();

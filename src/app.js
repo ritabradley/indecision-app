@@ -13,6 +13,10 @@ const template = (
         ? 'Here are your options'
         : 'No options available'}
     </p>
+    <ol>
+      <li>Item One</li>
+      <li>Items Two</li>
+    </ol>
   </div>
 );
 
@@ -27,15 +31,42 @@ const getLocation = location => {
     return <p>Location: {location}</p>;
   }
 };
+let count = 0;
 
-const templateTwo = (
-  <div>
-    <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {user.age && user.age >= 18 && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
-  </div>
-);
+const increase = () => {
+  console.log('Add one');
+  count++;
+  renderCounterApp();
+};
+
+const decrease = () => {
+  console.log('Substract one');
+  count--;
+  renderCounterApp();
+};
+
+const reset = () => {
+  console.log('reset');
+  count = 0;
+  renderCounterApp();
+};
 
 const root = document.getElementById('root');
 
-ReactDOM.render(template, root);
+const renderCounterApp = () => {
+  const templateTwo = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increase} className="button">
+        +1
+      </button>
+      <button onClick={decrease} className="button">
+        -1
+      </button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+  ReactDOM.render(templateTwo, root);
+};
+
+renderCounterApp();
